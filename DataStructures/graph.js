@@ -13,7 +13,7 @@ class Graph {
         let path = "";
         let self = this;
         
-        let dfsHelper = function(v, visited) {
+        let dfsHelper = function(v) {
             path += v + " ";
             visited[v] = true;
             let list = self.pq[v];
@@ -25,8 +25,8 @@ class Graph {
             }
         }
 
-        dfsHelper(s, visited, path);
-        console.log(path);
+        dfsHelper(s);
+        console.log("dfs", path);
     }
 
     breadthFirstSearch(s) {
@@ -49,7 +49,7 @@ class Graph {
             }
         }
 
-        console.log(path);
+        console.log("bfs", path);
     }
 
     addEdge(i, j) {
