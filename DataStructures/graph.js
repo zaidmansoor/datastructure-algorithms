@@ -27,6 +27,7 @@ class Graph {
 
         dfsHelper(s);
         console.log("dfs", path);
+        return path;
     }
 
     breadthFirstSearch(s) {
@@ -50,6 +51,7 @@ class Graph {
         }
 
         console.log("bfs", path);
+        return path;
     }
 
     addEdge(i, j) {
