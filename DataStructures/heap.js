@@ -8,41 +8,44 @@ class Heap {
         return this.count === 0;
     }
 
-    insert(key) {
-        this.pq[++this.count] = key;
+    insert(val) {
+        this.pq[++this.count] = val;
         this.swim(this.count);
     }
 
     deletMax() {
-        let key = this.pq[1];
-        this.exchange(1, this.count--);
+        this.exchange(1, this.count);
+        let val = this.pq[this.count];
+        this.count--;
         this.sink(1);
-        this.pq[this.count + 1] = null;
-        return key;
+        this.pq[this.count + 1] = "-";
+        
+        return val;
     }
 
-    sink(k) {
-        while (2 * k <= this.count) {
-            let j = 2 * k;
-            if (j < this.count && this.pq[j] < this.pq[j + 1]) {
-                j++;
-            }
-
-            if (this.pq[k] > this.pq[j]) {
-                break;
-            }
-
-            this.exchange(k, j);
-            k = j;
+    swim(i) {
+        let parent = Math.floor(i / 2);
+        while(i > 1 && this.pq[i] > this.pq[parent]) {
+            this.exchange(i, parent);
+            i = parent;
+            parent = Math.floor(parent / 2);
         }
     }
 
-    swim(k) {
-        let pK = Math.floor(k / 2);
-        while (k > 1 && (this.pq[pK] < this.pq[k])) {
-            this.exchange(pK, k);
-            k = pK;
-            pK = Math.floor(k / 2);
+    sink(i) {
+        while( 2 * i <= this.count) {
+            let child = 2 * i;
+
+            if (child < this.count && this.pq[child] < this.pq[child + 1]) {
+                child++;
+            }
+
+            if (this.pq[child] < this.pq[i]) {
+                break;
+            }
+
+            this.exchange(i, child);
+            i = child;
         }
     }
 
@@ -59,26 +62,14 @@ class Heap {
 
 let pq = new Heap(10);
 
-pq.insert("h");
-pq.insert("e");
-pq.insert("a");
-pq.insert("p");
-pq.insert("s");
-pq.insert("o");
-pq.insert("r");
-pq.insert("t");
-pq.print();
-console.log("remove");
-console.log(pq.deletMax());
-pq.print();
-console.log("remove");
-console.log(pq.deletMax());
-pq.print();
-console.log("remove");
-console.log(pq.deletMax());
-pq.print();
-console.log("remove");
-console.log(pq.deletMax());
+pq.insert(1);
+pq.insert(2);
+pq.insert(3);
+pq.insert(4);
+pq.insert(5);
+pq.insert(6);
+pq.insert(7);
+pq.insert(8);
 pq.print();
 console.log("remove");
 console.log(pq.deletMax());
@@ -91,3 +82,13 @@ pq.print();
 console.log("remove");
 console.log(pq.deletMax());
 pq.print();
+
+console.log("remove");
+console.log(pq.deletMax());
+pq.print();
+
+console.log("remove");
+console.log(pq.deletMax());
+pq.print();
+
+

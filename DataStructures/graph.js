@@ -56,7 +56,7 @@ class Graph {
 
     addEdge(i, j) {
         this.pq[i].push(j);
-        //this.pq[j].push(i);
+        this.pq[j].push(i);
     }
 
     printGraph() {
